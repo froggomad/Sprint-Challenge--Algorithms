@@ -96,27 +96,44 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        #start condition
-        self.swap_item()
+        # MARK: bubble programmatic
 
-        # MARK: bubble
-        # TODO: Test for efficiency (might be able to cut this number in half since sorting bidi)
-        for _ in range(len(self._list)-1):
-            # move over 1
-            self.move_right()
-            #sort right
-            while self.can_move_right():                        
-                if self.compare_item() == -1:
-                    self.swap_item()
-                    print("swapped right")
-                self.move_right()
-            #sort left
-            while self.can_move_left():
-                if self.compare_item() == 1:
-                    self.swap_item()
-                    print("swapped left")
-                self.move_left()
-        self.swap_item()
+        #while loop - what's the end condition?
+
+            # take first item, move right
+
+            # sort iteratively right to end
+
+            # move left until hit None (sort while moving?)
+
+            # move right one
+
+            # loop
+
+        # sort left one time to remove Nones
+
+        
+        
+        # # MARK: bubble
+        # #start condition
+        # self.swap_item()        
+        # # TODO: Test for efficiency (might be able to cut this number in half since sorting bidi)
+        # for _ in range(len(self._list)//2):
+        #     # move over 1
+        #     self.move_right()
+        #     #sort right
+        #     while self.can_move_right():                        
+        #         if self.compare_item() == -1:
+        #             self.swap_item()
+        #             print("swapped right")
+        #         self.move_right()
+        #     #sort left
+        #     while self.can_move_left():
+        #         if self.compare_item() == 1:
+        #             self.swap_item()
+        #             print("swapped left")
+        #         self.move_left()
+        # self.swap_item()
 
 
 if __name__ == "__main__":
