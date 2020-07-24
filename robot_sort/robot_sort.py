@@ -96,8 +96,27 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        #start condition
+        self.swap_item()
+
+        # MARK: bubble
+        # TODO: Test for efficiency (might be able to cut this number in half since sorting bidi)
+        for _ in range(len(self._list)-1):
+            # move over 1
+            self.move_right()
+            #sort right
+            while self.can_move_right():                        
+                if self.compare_item() == -1:
+                    self.swap_item()
+                    print("swapped right")
+                self.move_right()
+            #sort left
+            while self.can_move_left():
+                if self.compare_item() == 1:
+                    self.swap_item()
+                    print("swapped left")
+                self.move_left()
+        self.swap_item()
 
 
 if __name__ == "__main__":
