@@ -92,13 +92,66 @@ class SortingRobot:
         """
         return self._light == "ON"
 
+    def check_if_sorted(self):
+        
+        while self.can_move_left():
+            self.move_left()
+            print(f"holding {self._item}")
+            if self.compare_item() == None:
+                print("picked up none")
+                self.swap_item()
+                if self.can_move_right():
+                    self.move_right()
+                    self.swap_item()
+                    if self.can_move_right() == False:
+                        return True
+                    else:
+                        return False
+                else:
+                    print("done")
+                    return True
+            if self.compare_item() == 1:
+                self.traverse_left()
+                return False
+        #can't move left anymore, we're at the head
+        self.swap_item()
+        return False
+            
+
+    def traverse_left(self):
+        while self.can_move_left():
+            self.move_left()
+            print("moving left")
+        if self.compare_item() == None:
+                print("picked up none after traversing left")
+                self.swap_item()
+                self.move_right()
+            
+           
+
     def sort(self):
         """
         Sort the robot's list.
         """
         # MARK: bubble programmatic
+        self.set_light_on()
+        self.swap_item()
+        
 
-        #while loop - what's the end condition?
+        while self.light_is_on():
+            while self.can_move_right():
+                if self.compare_item() == 1:
+                    print(f"This item is: {self._item}")                    
+                    self.swap_item()
+                    print(f"compared to: {self._item}")
+                    print("swapped right")
+                print("moving right")
+                self.move_right()
+
+            if self.check_if_sorted() == True:
+                print("sorted")
+                self.set_light_off()                
+            
 
             # take first item, move right
 
@@ -106,13 +159,11 @@ class SortingRobot:
 
             # move left until hit None (sort while moving?)
 
-            # move right one
-
             # loop
 
         # sort left one time to remove Nones
 
-        
+
         
         # # MARK: bubble
         # #start condition
