@@ -92,12 +92,99 @@ class SortingRobot:
         """
         return self._light == "ON"
 
+    def check_if_sorted(self):
+        
+        while self.can_move_left():
+            self.move_left()
+            print(f"holding {self._item}")
+            if self.compare_item() == None:
+                print("picked up none")
+                self.swap_item()
+                if self.can_move_right():
+                    self.move_right()
+                    self.swap_item()
+                    if self.can_move_right() == False:
+                        return True
+                    else:
+                        return False
+                else:
+                    print("done")
+                    return True
+            if self.compare_item() == 1:
+                self.traverse_left()
+                return False
+        #can't move left anymore, we're at the head
+        self.swap_item()
+        return False
+            
+
+    def traverse_left(self):
+        while self.can_move_left():
+            self.move_left()
+            print("moving left")
+        if self.compare_item() == None:
+                print("picked up none after traversing left")
+                self.swap_item()
+                self.move_right()
+            
+           
+
     def sort(self):
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # MARK: bubble programmatic
+        self.set_light_on()
+        self.swap_item()
+        
+
+        while self.light_is_on():
+            while self.can_move_right():
+                if self.compare_item() == 1:
+                    print(f"This item is: {self._item}")                    
+                    self.swap_item()
+                    print(f"compared to: {self._item}")
+                    print("swapped right")
+                print("moving right")
+                self.move_right()
+
+            if self.check_if_sorted() == True:
+                print("sorted")
+                self.set_light_off()                
+            
+
+            # take first item, move right
+
+            # sort iteratively right to end
+
+            # move left until hit None (sort while moving?)
+
+            # loop
+
+        # sort left one time to remove Nones
+
+
+        
+        # # MARK: bubble
+        # #start condition
+        # self.swap_item()        
+        # # TODO: Test for efficiency (might be able to cut this number in half since sorting bidi)
+        # for _ in range(len(self._list)//2):
+        #     # move over 1
+        #     self.move_right()
+        #     #sort right
+        #     while self.can_move_right():                        
+        #         if self.compare_item() == -1:
+        #             self.swap_item()
+        #             print("swapped right")
+        #         self.move_right()
+        #     #sort left
+        #     while self.can_move_left():
+        #         if self.compare_item() == 1:
+        #             self.swap_item()
+        #             print("swapped left")
+        #         self.move_left()
+        # self.swap_item()
 
 
 if __name__ == "__main__":
